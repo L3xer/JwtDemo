@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -37,6 +38,7 @@ namespace JwtDemo
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             var builder = services.AddIdentityCore<AppUser>(o => {
                 // configure identity options
